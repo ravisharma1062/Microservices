@@ -10,10 +10,10 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>io.javabrains</groupId>
-	<artifactId>movie-info-service</artifactId>
+	<artifactId>movie-info</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>movie-info-service</name>
-	<description>Demo project for Spring Boot</description>
+	<name>movie-info</name>
+	<description>Movie Info</description>
 
 	<properties>
 		<java.version>1.8</java.version>
