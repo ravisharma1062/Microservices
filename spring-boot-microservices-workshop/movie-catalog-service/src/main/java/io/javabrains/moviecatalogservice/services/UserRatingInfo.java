@@ -29,7 +29,7 @@ public class UserRatingInfo {
 //    )
     @HystrixCommand(fallbackMethod = "getFallbackUserRating")
 	public UserRating getUserRating(String userId) {
-		return restTemplate.getForObject("http://ratings-data-service/ratingsdata/user/" + userId, UserRating.class);
+		return restTemplate.getForObject("http://ratings-data/ratingsdata/user/" + userId, UserRating.class);
 	}
     
     private UserRating getFallbackUserRating(String userId) {
