@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 
 import io.javabrains.moviecatalogservice.models.Rating;
 import io.javabrains.moviecatalogservice.models.UserRating;
@@ -32,7 +31,8 @@ public class UserRatingInfo {
 		return restTemplate.getForObject("http://ratings-data/ratingsdata/user/" + userId, UserRating.class);
 	}
     
-    private UserRating getFallbackUserRating(String userId) {
+    @SuppressWarnings("unused")
+	private UserRating getFallbackUserRating(String userId) {
     	List<Rating> ratingList = new ArrayList<>();
     	ratingList.add(new Rating("0", 0));
     	

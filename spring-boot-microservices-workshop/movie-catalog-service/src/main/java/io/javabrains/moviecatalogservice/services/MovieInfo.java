@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 
 import io.javabrains.moviecatalogservice.models.CatalogItem;
 import io.javabrains.moviecatalogservice.models.Movie;
@@ -31,6 +30,7 @@ public class MovieInfo {
 		return new CatalogItem(movie.getName(), movie.getDescription(), rating.getRating());
 	}
 
+	@SuppressWarnings("unused")
 	private CatalogItem getFallbackCatalogItem(Rating rating) {
 		return new CatalogItem("No Movie", "Movie Service Is Down", 0);
 	}
