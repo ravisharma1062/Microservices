@@ -6,10 +6,17 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
+import org.springframework.http.HttpMethod;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.netflix.ribbon.proxy.annotation.Http;
 
 import io.javabrains.moviecatalogservice.models.CatalogItem;
 import io.javabrains.moviecatalogservice.models.Employee;
@@ -37,9 +44,11 @@ public class CatalogResource {
     @Autowired
     private Employee employee;
 
-    @RequestMapping("/{userId}")
-    public List<CatalogItem> getCatalog(@PathVariable("userId") String userId) {
-
+    @RequestMapping(path = "/{userId}", method = RequestMethod.GET)
+    @CacheEvict(value="thirty-second-cache", key="'CatalogCache'+#userId", condition="!#isCacheable", beforeInvocation = true)
+    @Cacheable(value="thirty-second-cache", key="'CatalogCache'+#userId", condition="#isCacheable")
+    public List<CatalogItem> getCatalog(@PathVariable("userId") String userId, @RequestParam boolean isCacheable) throws InterruptedException {
+    	Thread.sleep(5000);
         UserRating userRating = userRatingInfo.getUserRating(userId);
 
         return userRating.getRatings().stream()
