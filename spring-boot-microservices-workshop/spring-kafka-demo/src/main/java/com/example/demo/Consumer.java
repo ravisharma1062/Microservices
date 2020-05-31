@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class Consumer {
 	
-	@KafkaListener(topics="testravi")
+	@KafkaListener(topics="email")
 	public void consume(@Payload String message, @Headers MessageHeaders headers) {
 		System.out.println(message);
 		headers.keySet().forEach(key -> System.out.println(headers.get(key)));
