@@ -16,6 +16,9 @@ public class EmailService {
 
 	@Autowired
 	private JavaMailSender javaMailSender;
+	
+	@Autowired
+	private MailContentBuilder mailContentBuilder;
 
 	public String sendEmail(EmailDetails emailDetails) throws MessagingException {
 
@@ -25,7 +28,7 @@ public class EmailService {
 
 			helper.setTo(toAddress);
 			helper.setSubject(emailDetails.getSubject());
-			helper.setText(emailDetails.getBody());
+			helper.setText(mailContentBuilder.build(emailDetails.getBody()), true);
 
 			if(emailDetails.getAttachmentPath() != null) {
 				FileSystemResource file = new FileSystemResource(new File(emailDetails.getAttachmentPath()));
