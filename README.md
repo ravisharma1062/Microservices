@@ -7,4 +7,4 @@
 - `movie-info-service` - Spring Boot module.
 - `ratings-data-service` - Spring Boot module.
 - `spring-cloud-config-server` - This microservice has implemented Spring Cloud Config Server.
-- `spring-kafka-demo` - This is a Spring Boot module with Kafka implementation.
+- `spring-kafka-demo` - This is a Spring Boot module with Kafka implementation. [goto Kafka Module](/spring-boot-microservices-workshop/spring-kafka-demo)
