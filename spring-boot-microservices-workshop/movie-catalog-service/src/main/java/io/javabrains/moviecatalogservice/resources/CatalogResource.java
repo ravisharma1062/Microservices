@@ -74,12 +74,15 @@ public class CatalogResource {
     }
     
     @RequestMapping("/loggers")
-    public void printLogs() {
+    public String printLogs() {
 
     	log.debug("This is a debug message");
     	log.info("This is an info message");
     	log.warn("This is a warn message");
         log.error("This is an error message");
         log.fatal("This is a fatal message");
+        log.trace("This is trace message");
+        
+        return "Logged";
     }
 }
