@@ -4,19 +4,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
-import org.springframework.http.HttpMethod;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.netflix.ribbon.proxy.annotation.Http;
 
 import io.javabrains.moviecatalogservice.models.CatalogItem;
 import io.javabrains.moviecatalogservice.models.Employee;
@@ -29,6 +28,8 @@ import io.javabrains.moviecatalogservice.services.UserRatingInfo;
 @RequestMapping("/catalog")
 public class CatalogResource {
     
+	private static final Logger log = LogManager.getLogger(CatalogResource.class);
+	
     @Autowired
     private MovieInfo movieInfo;
     
@@ -70,5 +71,15 @@ public class CatalogResource {
     @RequestMapping("/getEmployee")
     public String getEmployee() {
     	return employee.toString();
+    }
+    
+    @RequestMapping("/loggers")
+    public void printLogs() {
+
+    	log.debug("This is a debug message");
+    	log.info("This is an info message");
+    	log.warn("This is a warn message");
+        log.error("This is an error message");
+        log.fatal("This is a fatal message");
     }
 }
