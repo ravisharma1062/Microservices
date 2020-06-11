@@ -1,4 +1,4 @@
-package com.application.dto;
+package com.application.jpa.dto;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,12 +15,12 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name="Users")
-public class Users {
+@Table(name="Movie")
+public class Movie {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="User_Id")
-	private int userId;
-	@Column(name="User_Name")
-	private String userName;
+	@Column(name="Movie_Id")
+	private int movieId;
+	@Column(name="Movie_Name")
+	private String movieName;
 }

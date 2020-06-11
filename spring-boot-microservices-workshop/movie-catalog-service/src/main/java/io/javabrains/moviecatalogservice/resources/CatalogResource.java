@@ -49,7 +49,7 @@ public class CatalogResource {
     @CacheEvict(value="thirty-second-cache", key="'CatalogCache'+#userId", condition="!#isCacheable", beforeInvocation = true)
     @Cacheable(value="thirty-second-cache", key="'CatalogCache'+#userId", condition="#isCacheable")
     public List<CatalogItem> getCatalog(@PathVariable("userId") String userId, @RequestParam boolean isCacheable) throws InterruptedException {
-    	Thread.sleep(5000);
+    	//Thread.sleep(5000);
         UserRating userRating = userRatingInfo.getUserRating(userId);
 
         return userRating.getRatings().stream()

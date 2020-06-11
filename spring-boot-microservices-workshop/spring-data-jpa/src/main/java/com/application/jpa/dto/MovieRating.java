@@ -1,4 +1,4 @@
-package com.application.dto;
+package com.application.jpa.dto;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;

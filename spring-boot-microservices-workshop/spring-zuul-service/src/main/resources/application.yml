@@ -1,0 +1,4 @@
+zuul:
+  ignored-services: '*'
+  routes:
+    spring-data-jpa: /datajpa/**
