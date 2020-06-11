@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,6 +27,7 @@ public class MovieRating {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="Rating_Id")
 	private int ratingId;
+	@NotNull(message="Rating Cannot be blank")
 	@Column(name="Rating")
 	private int rating;
 	@ManyToOne(cascade=CascadeType.ALL)

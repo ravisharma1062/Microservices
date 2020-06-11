@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,6 +22,7 @@ public class Users {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="User_Id")
 	private int userId;
+	@NotBlank(message="User Name Cannot Be Blank")
 	@Column(name="User_Name")
 	private String userName;
 }

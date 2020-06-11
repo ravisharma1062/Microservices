@@ -3,7 +3,6 @@ package com.application.jpa.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import com.application.jpa.dto.Movie;
 import com.application.jpa.dto.MovieRating;
@@ -36,12 +35,12 @@ public class MovieRatingsService {
 	}
 	
     @Transactional
-    public Movie saveMovie(@RequestBody Movie movie) {
+    public Movie saveMovie(Movie movie) {
         return movieRepository.save(movie);
     }
     
     @Transactional
-    public Users saveUser(@RequestBody Users users) {
+    public Users saveUser(Users users) {
         return userRepository.save(users);
     }
 }

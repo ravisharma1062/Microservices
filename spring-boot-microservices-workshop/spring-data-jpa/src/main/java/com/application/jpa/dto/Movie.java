@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,6 +22,7 @@ public class Movie {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="Movie_Id")
 	private int movieId;
+	@NotBlank(message="Movie Name Cannot Be Blank")
 	@Column(name="Movie_Name")
 	private String movieName;
 }

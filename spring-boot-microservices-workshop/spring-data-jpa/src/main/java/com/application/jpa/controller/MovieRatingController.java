@@ -1,4 +1,6 @@
 package com.application.jpa.controller;
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,12 +25,12 @@ public class MovieRatingController {
     }
     
     @RequestMapping(path = "/createmovie", method = RequestMethod.POST)
-    public Movie saveMovie(@RequestBody Movie movie) {
+    public Movie saveMovie(@Valid @RequestBody Movie movie) {
         return movieRatingsService.saveMovie(movie);
     }
     
     @RequestMapping(path = "/createuser", method = RequestMethod.POST)
-    public Users saveUser(@RequestBody Users users) {
+    public Users saveUser(@Valid @RequestBody Users users) {
         return movieRatingsService.saveUser(users);
     }
 
