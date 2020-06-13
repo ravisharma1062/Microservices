@@ -1,4 +1,4 @@
-package com.application.email;
+package com.application.email.dto;
 
 import java.util.List;
 

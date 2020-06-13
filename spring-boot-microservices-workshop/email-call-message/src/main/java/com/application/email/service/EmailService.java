@@ -1,4 +1,4 @@
-package com.application.email;
+package com.application.email.service;
 
 import java.io.File;
 
@@ -10,6 +10,8 @@ import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+
+import com.application.email.dto.EmailDetails;
 
 @Service
 public class EmailService {

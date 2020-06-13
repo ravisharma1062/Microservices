@@ -1,4 +1,4 @@
-package com.application.twilio;
+package com.application.email.service;
 
 import java.net.URI;
 import java.net.URISyntaxException;

@@ -1,35 +1,42 @@
-package com.application.twilio;
+package com.application.email.controller;
 
 import java.net.URISyntaxException;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.client.loadbalancer.LoadBalanced;
-import org.springframework.cloud.context.config.annotation.RefreshScope;
-import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
-import org.springframework.context.annotation.Bean;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
+import javax.mail.MessagingException;
 
-@RefreshScope
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.application.email.dto.EmailDetails;
+import com.application.email.service.CallService;
+import com.application.email.service.EmailService;
+import com.application.email.service.MessageService;
+
 @RestController
-@EnableEurekaClient
-@SpringBootApplication 
-public class TwilioCallMessageApplication {
+public class CommunicationController {
+	
+	@Autowired
+	private EmailService emailService;
 	
 	@Autowired
 	private CallService callService;
 	
 	@Autowired
 	private MessageService messageService;
-
-	public static void main(String[] args) {
-		SpringApplication.run(TwilioCallMessageApplication.class, args);
+	
+	@RequestMapping(value="/sendEmail", method=RequestMethod.POST)
+	public String sendEmail(@RequestBody EmailDetails emailDetails) {
+		try {
+			return emailService.sendEmail(emailDetails);
+		} catch (MessagingException e) {
+			return "Send Email Failed";
+		}
 	}
-
+	
 	@RequestMapping("/makeCall/{toNumber}")
 	public String makeCall(@PathVariable String toNumber) throws URISyntaxException {
 		callService.makeCall(toNumber);
@@ -42,11 +49,5 @@ public class TwilioCallMessageApplication {
 		messageService.sendMessage(toNumber, message);
 		
 		return "Message - " + message + "- Sent to :" + toNumber;
-	}
-	
-	@LoadBalanced
-	@Bean
-	public RestTemplate getRestTemplate() {
-		return new RestTemplate();
 	}
 }
