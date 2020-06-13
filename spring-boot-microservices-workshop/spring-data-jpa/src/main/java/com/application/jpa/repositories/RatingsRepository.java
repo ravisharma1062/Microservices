@@ -7,5 +7,5 @@ import com.application.jpa.dto.MovieRating;
 
 @Repository
 public interface RatingsRepository extends JpaRepository<MovieRating, Integer>{
-	MovieRating findByRatingId(int id);
+
 }

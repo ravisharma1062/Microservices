@@ -18,18 +18,13 @@ public class RatingsResource {
 	
 	@Autowired
 	private RatingsRepository userRatingMongoRepository;
-		
-//    @RequestMapping("/movies/{movieId}")
-//    public Rating getMovieRating(@PathVariable("movieId") String movieId) {
-//        return new Rating(movieId, 4);
-//    }
 
-    @RequestMapping("/user/{userId}")
+    @RequestMapping(path="/user/{userId}", method = RequestMethod.GET)
     public UserRating getUserRatings(@PathVariable("userId") String userId) {
         return userRatingMongoRepository.findByUserId(userId);
     }
     
-    @RequestMapping("/users")
+    @RequestMapping(path="/users", method = RequestMethod.GET)
     public List<UserRating> getAllUserRatings() {
         return userRatingMongoRepository.findAll();
     }

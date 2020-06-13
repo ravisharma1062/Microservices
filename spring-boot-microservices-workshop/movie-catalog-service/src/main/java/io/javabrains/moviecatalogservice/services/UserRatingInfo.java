@@ -34,7 +34,7 @@ public class UserRatingInfo {
     @SuppressWarnings("unused")
 	private UserRating getFallbackUserRating(String userId) {
     	List<Rating> ratingList = new ArrayList<>();
-    	ratingList.add(new Rating("0", 0));
+    	ratingList.add(new Rating("501", 2));
     	
     	UserRating rating = new UserRating();
     	rating.setUserId(userId);

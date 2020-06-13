@@ -6,7 +6,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,4 +27,11 @@ public class Users {
 	@NotBlank(message="User Name Cannot Be Blank")
 	@Column(name="User_Name")
 	private String userName;
+	@Email(message="Invalid Email Address")
+	@Pattern(regexp=".+@.+\\..+", message="Invalid Email Address")
+	@Column(name="Email_Id", unique=true)
+	private String emailId;
+	@Pattern(regexp="(^$|[0-9]{10})", message="Invalid Phone Number")
+	@Column(name="Phone_Number", unique=true)
+	private String phoneNumber;
 }

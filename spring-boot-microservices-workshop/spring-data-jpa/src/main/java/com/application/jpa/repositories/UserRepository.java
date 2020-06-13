@@ -7,5 +7,5 @@ import com.application.jpa.dto.Users;
 
 @Repository
 public interface UserRepository extends JpaRepository<Users, Integer>{
-	Users findByUserId(int id);
+
 }
