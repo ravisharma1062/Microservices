@@ -1,5 +1,6 @@
 package com.application.jpa;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,4 +22,12 @@ public class MovieRatingGlobalAdvice {
 		return errorResponse;
 	}
 
+	@ExceptionHandler(DataIntegrityViolationException.class)
+	@ResponseStatus(HttpStatus.NOT_FOUND)
+	@ResponseBody
+	public ErrorResponse  handleGlobleExceptions(DataIntegrityViolationException dataIntegrityViolationException) {
+		ErrorResponse errorResponse = new ErrorResponse();
+		errorResponse.setErrorMessage(dataIntegrityViolationException.getMessage());
+		return errorResponse;
+	}
 }
