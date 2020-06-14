@@ -12,6 +12,7 @@ import com.application.jpa.exception.DataJPAException;
 import com.application.jpa.service.MovieRatingsService;
 
 @RestController
+@RequestMapping("/user")
 public class MovieRatingController {
 		
 	@Autowired

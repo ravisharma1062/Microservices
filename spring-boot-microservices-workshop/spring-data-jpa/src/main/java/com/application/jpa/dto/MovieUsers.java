@@ -18,8 +18,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name="Users")
-public class Users {
+@Table(name="Movie_Users")
+public class MovieUsers {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="User_Id")

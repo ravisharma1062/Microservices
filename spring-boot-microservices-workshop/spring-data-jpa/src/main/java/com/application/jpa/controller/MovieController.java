@@ -12,11 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.application.jpa.dto.Movie;
+import com.application.jpa.dto.MovieDetails;
 import com.application.jpa.exception.DataJPAException;
 import com.application.jpa.service.MovieRatingsService;
 
 @RestController
+@RequestMapping("/admin")
 public class MovieController {
 	
 	@Autowired
@@ -24,25 +25,25 @@ public class MovieController {
 	
     
     @RequestMapping(path = "/createmovie", method = RequestMethod.POST)
-    public ResponseEntity<?> saveMovie(@Valid @RequestBody Movie movie, BindingResult bindingResult) {
+    public ResponseEntity<?> saveMovie(@Valid @RequestBody MovieDetails movie, BindingResult bindingResult) {
     	if(bindingResult.hasErrors()) {
     		return ControllerUtil.getFieldErrorResponse("FieldError", ControllerUtil.getErrorResponseMap(bindingResult));
     	}
-    	Movie movieCreated = movieRatingsService.saveMovie(movie);
+    	MovieDetails movieCreated = movieRatingsService.saveMovie(movie);
     	return new ResponseEntity<>(movieCreated, HttpStatus.OK);
     }
     
     @RequestMapping(path = "/updatemovie", method = RequestMethod.PUT)
-    public ResponseEntity<?> updateMovie(@Valid @RequestBody Movie movie, BindingResult bindingResult) {
+    public ResponseEntity<?> updateMovie(@Valid @RequestBody MovieDetails movie, BindingResult bindingResult) {
     	if(bindingResult.hasErrors()) {
     		return ControllerUtil.getFieldErrorResponse("FieldError", ControllerUtil.getErrorResponseMap(bindingResult));
     	}
-    	Movie movieCreated = movieRatingsService.updateMovie(movie);
+    	MovieDetails movieCreated = movieRatingsService.updateMovie(movie);
     	return new ResponseEntity<>(movieCreated, HttpStatus.OK);
     }
     
     @RequestMapping(path = "/movie/{movieId}", method = RequestMethod.GET)
-    public ResponseEntity<Movie> getMovie(@PathVariable("movieId") int movieId) throws DataJPAException {
+    public ResponseEntity<MovieDetails> getMovie(@PathVariable("movieId") int movieId) throws DataJPAException {
         return new ResponseEntity<>(movieRatingsService.getMovie(movieId), HttpStatus.OK);
     }
     

@@ -4,9 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.application.jpa.dto.Movie;
+import com.application.jpa.dto.MovieDetails;
 import com.application.jpa.dto.MovieRating;
-import com.application.jpa.dto.Users;
+import com.application.jpa.dto.MovieUsers;
 import com.application.jpa.exception.DataJPAException;
 import com.application.jpa.repositories.MovieRepository;
 import com.application.jpa.repositories.RatingsRepository;
@@ -27,34 +27,34 @@ public class MovieRatingsService {
 	@Transactional
 	public MovieRating createRating(int userId, int movieId, int rating) throws DataJPAException {
 		
-		Movie movie = getMovieById(movieId);
-		Users users = getUserById(userId);
+		MovieDetails movie = getMovieById(movieId);
+		MovieUsers users = getUserById(userId);
 		
 		MovieRating movieRating = new MovieRating(0, 4, movie, users);
 		
 		return ratingsRepository.save(movieRating);
 	}
 
-	private Users getUserById(int userId) throws DataJPAException {
+	private MovieUsers getUserById(int userId) throws DataJPAException {
 		return userRepository.findById(userId).orElseThrow(() -> new DataJPAException("INVALID_USER_ID", "Invalid User Id"));
 	}
 
-	private Movie getMovieById(int movieId) throws DataJPAException {
+	private MovieDetails getMovieById(int movieId) throws DataJPAException {
 		return movieRepository.findById(movieId).orElseThrow(() -> new DataJPAException("INVALID_MOVIE_ID", "Invalid Movie Id"));
 	}
 	
     @Transactional
-    public Movie saveMovie(Movie movie) {
+    public MovieDetails saveMovie(MovieDetails movie) {
         return movieRepository.save(movie);
     }
     
     @Transactional
-    public Users saveUser(Users users) {
+    public MovieUsers saveUser(MovieUsers users) {
         return userRepository.save(users);
     }
       
     @Transactional
-    public Movie updateMovie(Movie movie) {
+    public MovieDetails updateMovie(MovieDetails movie) {
     	return movieRepository.findById(movie.getMovieId())
     		.map(movieFromDB -> {
     			movieFromDB.setMovieName(movie.getMovieName());
@@ -66,7 +66,7 @@ public class MovieRatingsService {
     }
     
     @Transactional
-    public Users updateUser(Users users) {
+    public MovieUsers updateUser(MovieUsers users) {
     	return userRepository.findById(users.getUserId())
         		.map(userFromDB -> {
         			userFromDB.setUserName(users.getUserName());
@@ -79,11 +79,11 @@ public class MovieRatingsService {
         		});
     }
     
-    public Users getUser(int userId) throws DataJPAException {
+    public MovieUsers getUser(int userId) throws DataJPAException {
         return getUserById(userId);
     }
     
-    public Movie getMovie(int movieId) throws DataJPAException {
+    public MovieDetails getMovie(int movieId) throws DataJPAException {
         return getMovieById(movieId);
     }
     

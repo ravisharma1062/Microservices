@@ -32,8 +32,8 @@ public class MovieRating {
 	private int rating;
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="Movie_Id")
-	private Movie movieId;
+	private MovieDetails movieId;
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="User_Id")
-	private Users userId;
+	private MovieUsers userId;
 }
