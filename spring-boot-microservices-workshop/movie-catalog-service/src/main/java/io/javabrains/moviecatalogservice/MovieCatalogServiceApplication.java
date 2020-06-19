@@ -62,11 +62,11 @@ public class MovieCatalogServiceApplication {
         };
         vendorExtensions.add(v);
         ApiInfo apiInfo = new ApiInfo(
-                "Spring Boot REST API",
-                "Spring Boot REST API for Online Store",
+                "Movie Catalog Service",
+                "Catalog of all the movies with the details and ratings",
                 "1.0",
-                "https://www.catalogbar.com/terms-of-service/",
-                new Contact("Ravi Sharma", "https://en.wikipedia.org/wiki/Ravi_Sarma", "ravi.sharma@gmail.com"),
+                "https://api.themoviedb.org",
+                new Contact("Ravi Sharma", "https://github.com/ravisharma1062/Microservices", "ravisharma.1062@gmail.com"),
                 "Apache License Version 2.0",
                 "https://www.apache.org/licenses/LICENSE-2.0", vendorExtensions);
         return apiInfo;
