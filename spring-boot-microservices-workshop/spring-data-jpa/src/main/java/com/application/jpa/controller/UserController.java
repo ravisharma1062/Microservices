@@ -14,9 +14,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.application.jpa.dto.MovieDetails;
+import com.application.jpa.dto.MovieRating;
 import com.application.jpa.dto.MovieUsers;
 import com.application.jpa.exception.DataJPAException;
 import com.application.jpa.service.MovieRatingsService;
+
+import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping("/admin")
@@ -25,7 +29,15 @@ public class UserController {
 	@Autowired
 	MovieRatingsService movieRatingsService;
 	
-    @RequestMapping(path = "/createuser", method = RequestMethod.POST)
+	@ApiOperation(
+			value = "createuser", 
+			notes = "Save user in DB", 
+			httpMethod = "POST",
+			response = MovieUsers.class,
+			consumes = "application/json",
+			produces = "application/json"
+	)
+    @RequestMapping(path = "/createuser", method = RequestMethod.POST, consumes="application/json", produces="application/json")
     public ResponseEntity<?> saveUser(@Valid @RequestBody MovieUsers users, BindingResult bindingResult) {
     	if(bindingResult.hasErrors()) {
     		return ControllerUtil.getFieldErrorResponse("FieldError", ControllerUtil.getErrorResponseMap(bindingResult));
@@ -34,7 +46,15 @@ public class UserController {
         return new ResponseEntity<>(usersCreated, HttpStatus.OK);
     }
     
-    @RequestMapping(path = "/updateuser", method = RequestMethod.PUT)
+	@ApiOperation(
+			value = "updateuser", 
+			notes = "Updates user in DB", 
+			httpMethod = "PUT",
+			response = MovieUsers.class,
+			consumes = "application/json",
+			produces = "application/json"
+	)
+    @RequestMapping(path = "/updateuser", method = RequestMethod.PUT, consumes="application/json", produces="application/json")
     public ResponseEntity<?> updateUser(@Valid @RequestBody MovieUsers users, BindingResult bindingResult) {
     	if(bindingResult.hasErrors()) {
     		return ControllerUtil.getFieldErrorResponse("FieldError", ControllerUtil.getErrorResponseMap(bindingResult));
@@ -43,17 +63,33 @@ public class UserController {
         return new ResponseEntity<>(usersCreated, HttpStatus.OK);
     }
     
-    @RequestMapping(path = "/user/{userId}", method = RequestMethod.GET)
+	@ApiOperation(
+			value = "get user", 
+			notes = "get user details", 
+			httpMethod = "GET",
+			response = MovieUsers.class,
+			consumes = "application/json",
+			produces = "application/json"
+	)
+    @RequestMapping(path = "/user/{userId}", method = RequestMethod.GET, consumes="application/json", produces="application/json")
     public ResponseEntity<MovieUsers> getUser(@PathVariable("userId") int userId) throws DataJPAException {
         return new ResponseEntity<>(movieRatingsService.getUser(userId), HttpStatus.OK);
     }
     
-    @RequestMapping(path = "/user/{userId}", method = RequestMethod.DELETE)
+	@ApiOperation(
+			value = "delete user", 
+			notes = "delete user details", 
+			httpMethod = "DELETE",
+			response = MovieUsers.class,
+			consumes = "application/json",
+			produces = "application/json"
+	)
+    @RequestMapping(path = "/user/{userId}", method = RequestMethod.DELETE, consumes="application/json", produces="application/json")
     public ResponseEntity<String> deleteUser(@PathVariable("userId") int userId) throws DataJPAException {
         return new ResponseEntity<>(movieRatingsService.deleteUser(userId), HttpStatus.OK);
     }
     
-    @RequestMapping(path = "/hi", method = RequestMethod.GET)
+    @RequestMapping(path = "/hi", method = RequestMethod.GET, consumes="application/json", produces="application/json")
     public ResponseEntity<String> getHi() throws DataJPAException {
         return new ResponseEntity<>("Hi All!!", HttpStatus.OK);
     }

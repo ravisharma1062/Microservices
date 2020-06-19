@@ -9,6 +9,7 @@
 - `ratings-data-service` - Spring Boot module.
 - `spring-cloud-config-server` - This microservice has implemented Spring Cloud Config Server.
 - `spring-kafka-demo` - This is a Spring Boot module with Kafka implementation. [goto Kafka Module](/spring-boot-microservices-workshop/spring-kafka-demo)
+- `spring-data-jpa`- Swagger access : http://localhost:8089/swagger-ui.html#/
 
 
 - Ports Used: 
@@ -20,5 +21,4 @@
 - Config Server: 8888
 - Spring Data: 8089
 - Kafka Service: 8088
-- Twilio Service: 8087
 - Zuul Service: 8084
