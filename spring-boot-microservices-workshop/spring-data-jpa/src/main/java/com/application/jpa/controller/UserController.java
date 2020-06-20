@@ -89,7 +89,7 @@ public class UserController {
         return new ResponseEntity<>(movieRatingsService.deleteUser(userId), HttpStatus.OK);
     }
     
-    @RequestMapping(path = "/hi", method = RequestMethod.GET, consumes="application/json", produces="application/json")
+    @RequestMapping(path = "/hi", method = RequestMethod.GET)
     public ResponseEntity<String> getHi() throws DataJPAException {
         return new ResponseEntity<>("Hi All!!", HttpStatus.OK);
     }

@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import com.application.jpa.dto.ErrorResponse;
 import com.application.jpa.exception.DataJPAException;
+import com.application.jpa.models.ErrorResponse;
 
 @RestControllerAdvice
 public class MovieRatingGlobalAdvice {

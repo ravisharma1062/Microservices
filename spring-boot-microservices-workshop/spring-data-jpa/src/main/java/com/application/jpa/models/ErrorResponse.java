@@ -1,4 +1,4 @@
-package com.application.jpa.dto;
+package com.application.jpa.models;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
