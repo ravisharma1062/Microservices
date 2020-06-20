@@ -1,0 +1,9 @@
+---
+applications:
+  - name: oauth-login
+    random-route: true
+    instances: 1
+    memory: 1G
+    buildpack: java_buildpack
+    path: target/spring-oauth-demo-0.0.1-SNAPSHOT.jar
+    domain: cfapps.io
