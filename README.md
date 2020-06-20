@@ -22,3 +22,4 @@
 - Spring Data: 8089
 - Kafka Service: 8088
 - Zuul Service: 8084
+- Oauth Service: 8090
