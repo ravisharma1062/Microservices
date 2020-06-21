@@ -7,6 +7,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.ws.rs.DefaultValue;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

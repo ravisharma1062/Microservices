@@ -42,8 +42,7 @@ public class UserController {
     	if(bindingResult.hasErrors()) {
     		return ControllerUtil.getFieldErrorResponse("FieldError", ControllerUtil.getErrorResponseMap(bindingResult));
     	}
-    	String password = users.getLoginDetails().getPassword();
-    	users.getLoginDetails().setPassword(passwordEncoder.encode(password));
+    	users.getLoginDetails().setPassword(passwordEncoder.encode(users.getLoginDetails().getPassword()));
     	MovieUsers usersCreated = movieRatingsService.saveUser(users);
         return new ResponseEntity<>(usersCreated, HttpStatus.OK);
     }
@@ -61,6 +60,7 @@ public class UserController {
     	if(bindingResult.hasErrors()) {
     		return ControllerUtil.getFieldErrorResponse("FieldError", ControllerUtil.getErrorResponseMap(bindingResult));
     	}
+    	users.getLoginDetails().setPassword(passwordEncoder.encode(users.getLoginDetails().getPassword()));
     	MovieUsers usersCreated = movieRatingsService.updateUser(users);
         return new ResponseEntity<>(usersCreated, HttpStatus.OK);
     }
