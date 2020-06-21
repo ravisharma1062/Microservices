@@ -2,11 +2,10 @@ package com.application.jpa.controller;
 
 import javax.validation.Valid;
 
-import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.Before;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.application.jpa.dto.MovieDetails;
-import com.application.jpa.dto.MovieRating;
 import com.application.jpa.dto.MovieUsers;
 import com.application.jpa.exception.DataJPAException;
 import com.application.jpa.service.MovieRatingsService;
@@ -23,11 +20,14 @@ import com.application.jpa.service.MovieRatingsService;
 import io.swagger.annotations.ApiOperation;
 
 @RestController
-@RequestMapping("/admin")
+@RequestMapping("/user")
 public class UserController {
 	
 	@Autowired
-	MovieRatingsService movieRatingsService;
+	private MovieRatingsService movieRatingsService;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	@ApiOperation(
 			value = "createuser", 
@@ -42,6 +42,8 @@ public class UserController {
     	if(bindingResult.hasErrors()) {
     		return ControllerUtil.getFieldErrorResponse("FieldError", ControllerUtil.getErrorResponseMap(bindingResult));
     	}
+    	String password = users.getLoginDetails().getPassword();
+    	users.getLoginDetails().setPassword(passwordEncoder.encode(password));
     	MovieUsers usersCreated = movieRatingsService.saveUser(users);
         return new ResponseEntity<>(usersCreated, HttpStatus.OK);
     }

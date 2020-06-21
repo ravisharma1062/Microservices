@@ -8,7 +8,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
@@ -33,6 +33,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.csrf().disable()
 				.authorizeRequests()
 				.antMatchers("/authenticate").permitAll()
+				.antMatchers("/user/createuser").permitAll()
 				.antMatchers("/v2/api-docs", "/configuration/**", "/swagger*/**", "/webjars/**").permitAll()
 				.antMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
 				.antMatchers("/user/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
@@ -44,9 +45,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.addFilterBefore(jwtRequestFiletr, UsernamePasswordAuthenticationFilter.class);
 	}
 	
+//	@Bean
+//	public PasswordEncoder passwordEncoder() {
+//	    return NoOpPasswordEncoder.getInstance();
+//	}
+	
 	@Bean
 	public PasswordEncoder passwordEncoder() {
-	    return NoOpPasswordEncoder.getInstance();
+	    return new BCryptPasswordEncoder();
 	}
 	
 	@Override
